@@ -46,20 +46,22 @@
     left: 50%;
     transform: translateX(-50%);
     font-weight: 900;
-    font-size: clamp(32px, 4vw, 60px);
+    font-size: clamp(36px, 4.5vw, 64px);
     letter-spacing: 0.5px;
     z-index: 10;
+    text-shadow: 0 0 25px rgba(255,255,255,0.5);
   }
 
-  /* Burj */
+  /* Brighter Burj */
   .burj {
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    width: min(420px, 70vw);
-    opacity: 0.25;
+    width: min(450px, 72vw);
+    opacity: 0.6;
     z-index: 1;
+    filter: drop-shadow(0 0 30px rgba(255,255,255,0.6));
   }
 
   /* Countdown boxes all in one line */
@@ -111,6 +113,7 @@
     padding: 10px 20px;
     border-radius: 8px;
   }
+
 </style>
 </head>
 <body>
@@ -120,23 +123,29 @@
   <main class="wrap">
     <h1 class="title">Gravity-Defying Crust | بيتزا ضد الجاذبية</h1>
 
+    <!-- Brighter Burj Khalifa -->
     <svg class="burj" viewBox="0 0 180 600">
       <defs>
         <linearGradient id="steel" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0%" stop-color="#e6e9ef"/>
-          <stop offset="60%" stop-color="#9aa3b8"/>
-          <stop offset="100%" stop-color="#6b738a"/>
+          <stop offset="0%" stop-color="#ffffff" />
+          <stop offset="40%" stop-color="#dfe6ef" />
+          <stop offset="70%" stop-color="#bfc8d7" />
+          <stop offset="100%" stop-color="#98a3b8" />
         </linearGradient>
+        <filter id="glow">
+          <feDropShadow dx="0" dy="0" stdDeviation="6" flood-color="#ffffff" flood-opacity="0.8"/>
+        </filter>
       </defs>
-      <rect x="88" y="20" width="4" height="120" fill="url(#steel)" />
-      <rect x="78" y="140" width="24" height="40" rx="2" fill="url(#steel)"/>
-      <rect x="72" y="180" width="36" height="50" rx="2" fill="url(#steel)"/>
-      <rect x="66" y="230" width="48" height="60" rx="3" fill="url(#steel)"/>
-      <rect x="58" y="290" width="64" height="70" rx="4" fill="url(#steel)"/>
-      <rect x="50" y="360" width="80" height="80" rx="5" fill="url(#steel)"/>
-      <rect x="40" y="440" width="100" height="90" rx="6" fill="url(#steel)"/>
+      <rect x="88" y="20" width="4" height="120" fill="url(#steel)" filter="url(#glow)" />
+      <rect x="78" y="140" width="24" height="40" rx="2" fill="url(#steel)" filter="url(#glow)"/>
+      <rect x="72" y="180" width="36" height="50" rx="2" fill="url(#steel)" filter="url(#glow)"/>
+      <rect x="66" y="230" width="48" height="60" rx="3" fill="url(#steel)" filter="url(#glow)"/>
+      <rect x="58" y="290" width="64" height="70" rx="4" fill="url(#steel)" filter="url(#glow)"/>
+      <rect x="50" y="360" width="80" height="80" rx="5" fill="url(#steel)" filter="url(#glow)"/>
+      <rect x="40" y="440" width="100" height="90" rx="6" fill="url(#steel)" filter="url(#glow)"/>
     </svg>
 
+    <!-- Countdown -->
     <div class="countdown">
       <div class="unit">
         <div class="num" id="d">00</div>
