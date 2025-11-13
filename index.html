@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Gravity-Defying Crust — Countdown</title>
+<meta name="description" content="A Burj Khalifa–shaped countdown to launch." />
+<style>
+  :root{
+    --bg:#0b0e1a;
+    --fg:#ffffff;
+    --accent:#ff2a2a;   /* Pizza Hut red vibe */
+    --glow:#ff6b6b;
+    --muted:#9aa4b2;
+  }
+  *{box-sizing:border-box}
+  html,body{height:100%}
+  body{
+    margin:0;
+    background: radial-gradient(1200px 800px at 50% 20%, #111732 0%, var(--bg) 50%, #070912 100%);
+    color:var(--fg);
+    font-family: system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial, "Noto Sans", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+    display:flex; align-items:center; justify-content:center;
+    overflow:hidden;
+  }
+
+  /* Background stars */
+  .stars, .stars:after {
+    position: absolute; inset: 0; content:"";
+    background-image: radial-gradient(2px 2px at 20% 30%, #ffffff88 40%, transparent 41%),
+                      radial-gradient(1.5px 1.5px at 70% 80%, #ffffff66 40%, transparent 41%),
+                      radial-gradient(1px 1px at 40% 60%, #ffffff55 40%, transparent 41%),
+                      radial-gradient(1.8px 1.8px at 85% 25%, #ffffff77 40%, transparent 41%),
+                      radial-gradient(1.2px 1.2px at 10% 75%, #ffffff55 40%, transparent 41%);
+    opacity:0.35;
+    animation: twinkle 8s linear infinite;
+  }
+  .stars:after{ animation-duration: 12s; opacity:0.25; }
+
+  @keyframes twinkle {
+    0%, 100% { filter: brightness(1); }
+    50% { filter: brightness(1.4); }
+  }
+
+  .wrap{
+    width:min(900px, 92vw);
+    text-align:center;
+    position:relative;
+    z-index:1;
+    padding:28px 12px 40px;
+  }
+
+  .title{
+    font-weight:800;
+    letter-spacing:0.2px;
+    font-size: clamp(22px, 2.5vw, 32px);
+    margin:0 0 8px;
+  }
+  .subtitle{
+    margin:0 0 24px;
+    color:var(--muted);
+    font-size: clamp(14px, 2vw, 16px);
+  }
+
+  /* Stage layout: Burj + countdown overlay */
+  .stage{
+    position:relative;
+    width:100%;
+    aspect-ratio: 16 / 9;
+    margin: 0 auto 14px;
+    display:grid;
+    place-items:center;
+  }
+
+  /* Burj SVG scales nicely */
+  .burj{
+    width:min(420px, 70vw);
+    filter: drop-shadow(0 0 10px #0009);
+  }
+
+  /* Countdown */
+  .countdown{
+    position:absolute;
+    display:flex; gap:14px;
+    align-items:baseline; justify-content:center;
+    flex-wrap:wrap;
+    bottom: 8%;
+    width: 100%;
+    text-shadow: 0 0 14px #0008;
+  }
+  .unit{
+    display:flex; flex-direction:column; align-items:center;
+    min-width: 80px;
+  }
+  .num{
+    font-weight:900; line-height:1; letter-spacing:1px;
+    font-size: clamp(34px, 6vw, 72px);
+    padding: 2px 8px 0;
+    border-radius: 8px;
+    background: linear-gradient(180deg, #ffffff, #f6f6f6);
+    color:#0b0e1a;
+    box-shadow: 0 0 24px #ffffff10, 0 0 40px var(--glow);
+    animation: pulse 2.4s ease-in-out infinite;
+  }
+  .lab{
+    margin-top:6px;
+    font-size: clamp(11px, 1.6vw, 13px);
+    color:#e6e6e6;
+    text-transform:uppercase;
+    letter-spacing:1px;
+  }
+  @keyframes pulse {
+    0%,100% { box-shadow: 0 0 18px #ffffff0e, 0 0 28px var(--glow); transform: translateZ(0) scale(1); }
+    50%     { box-shadow: 0 0 28px #ffffff22, 0 0 60px var(--glow); transform: translateZ(0) scale(1.02); }
+  }
+
+  /* CTA line */
+  .cta{
+    margin-top:14px;
+    font-weight:600;
+    font-size: clamp(13px, 2vw, 16px);
+  }
+  .cta .tag{
+    color:var(--accent);
+    font-weight:800;
+  }
+
+  /* Tiny footer note */
+  .note{
+    margin-top:10px; color:#c9d1e0; opacity:0.9; font-size:12px;
+  }
+
+  /* Make sure content never jumps on small phones */
+  @media (max-width:420px){
+    .countdown { gap:10px }
+    .unit{ min-width:64px }
+  }
+</style>
+</head>
+<body>
+  <div class="stars"></div>
+
+  <main class="wrap" role="main" aria-label="Countdown to launch">
+    <h1 class="title">Gravity-Defying Crust | بيتزا ضد الجاذبية</h1>
+    <p class="subtitle">Burj-shaped countdown to launch. Set your Dubai time below and publish.</p>
+
+    <section class="stage" aria-label="Burj Khalifa silhouette with countdown">
+      <!-- Simplified Burj Khalifa silhouette (stylized) -->
+      <svg class="burj" viewBox="0 0 180 600" role="img" aria-labelledby="burjTitle">
+        <title id="burjTitle">Stylized Burj Khalifa</title>
+        <defs>
+          <linearGradient id="steel" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="#bfc7d9"/>
+            <stop offset="60%" stop-color="#8b93a7"/>
+            <stop offset="100%" stop-color="#697189"/>
+          </linearGradient>
+          <filter id="glow">
+            <feDropShadow dx="0" dy="0" stdDeviation="4" flood-color="#6aa7ff" flood-opacity="0.45"/>
+          </filter>
+        </defs>
+
+        <!-- Spire -->
+        <rect x="88" y="20" width="4" height="120" fill="url(#steel)" />
+
+        <!-- Tapered stacked tiers (stylized silhouette) -->
+        <rect x="78" y="140" width="24" height="40" rx="2" fill="url(#steel)"/>
+        <rect x="72" y="180" width="36" height="50" rx="2" fill="url(#steel)"/>
+        <rect x="66" y="230" width="48" height="60" rx="3" fill="url(#steel)"/>
+        <rect x="58" y="290" width="64" height="70" rx="4" fill="url(#steel)"/>
+        <rect x="50" y="360" width="80" height="80" rx="5" fill="url(#steel)"/>
+        <rect x="40" y="440" width="100" height="90" rx="6" fill="url(#steel)"/>
+
+        <!-- Soft highlight lines -->
+        <g opacity="0.35" filter="url(#glow)">
+          <rect x="86" y="140" width="2" height="390" fill="#dfe7ff"/>
+          <rect x="96" y="160" width="1.5" height="360" fill="#e7ecff"/>
+        </g>
+      </svg>
+
+      <!-- Countdown overlay -->
+      <div class="countdown" aria-live="polite" aria-atomic="true">
+        <div class="unit">
+          <div class="num" id="d">00</div>
+          <div class="lab">Days</div>
+        </div>
+        <div class="unit">
+          <div class="num" id="h">00</div>
+          <div class="lab">Hours</div>
+        </div>
+        <div class="unit">
+          <div class="num" id="m">00</div>
+          <div class="lab">Minutes</div>
+        </div>
+        <div class="unit">
+          <div class="num" id="s">00</div>
+          <div class="lab">Seconds</div>
+        </div>
+      </div>
+    </section>
+
+    <p class="cta">Join the mission at lunch. <span class="tag">#Mission_Lunch</span></p>
+    <p class="note">Tip: change the launch time in the code to your exact Dubai time.</p>
+  </main>
+
+<script>
+  // ================================
+  // 1) Set your TARGET Dubai time
+  // ================================
+  // Example: Jan 15, 2026 at 12:00 (UTC+04:00)
+  const TARGET = new Date('2025-11-17T12:00:00+04:00');
+
+  // ================================
+  // 2) Countdown logic
+  // ================================
+  const dEl = document.getElementById('d');
+  const hEl = document.getElementById('h');
+  const mEl = document.getElementById('m');
+  const sEl = document.getElementById('s');
+
+  function pad(n){ return String(n).padStart(2,'0'); }
+
+  function tick(){
+    const now = new Date();
+    let diff = TARGET - now;
+    if (diff < 0) diff = 0;
+
+    const sec = Math.floor(diff / 1000);
+    const days = Math.floor(sec / 86400);
+    const hrs  = Math.floor((sec % 86400) / 3600);
+    const mins = Math.floor((sec % 3600) / 60);
+    const secs = sec % 60;
+
+    dEl.textContent = pad(days);
+    hEl.textContent = pad(hrs);
+    mEl.textContent = pad(mins);
+    sEl.textContent = pad(secs);
+  }
+  tick();
+  setInterval(tick, 1000);
+</script>
+</body>
+</html>
