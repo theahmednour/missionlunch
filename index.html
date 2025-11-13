@@ -5,118 +5,122 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Gravity-Defying Crust — Countdown</title>
 <style>
-  :root{
-    --red1:#e00000;   /* primary red */
-    --red2:#7a0000;   /* deeper red */
-    --fg:#ffffff;
+  :root {
+    --red1: #e00000;
+    --red2: #7a0000;
+    --fg: #ffffff;
   }
-  *{box-sizing:border-box}
-  html,body{height:100%}
-  body{
-    margin:0;
+  * { box-sizing: border-box; }
+  html, body { height: 100%; margin: 0; }
+  body {
     background: linear-gradient(180deg, var(--red1) 0%, var(--red2) 100%);
-    color:var(--fg);
-    font-family: system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial, "Noto Sans";
-    overflow:hidden;
-    position:relative;
+    color: var(--fg);
+    font-family: "Poppins", "Segoe UI", Roboto, sans-serif;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    position: relative;
   }
 
-  /* Top-right Pizza Hut logo */
-  .logo{
+  /* Pizza Hut logo */
+  .logo {
     position: fixed;
-    top:16px; right:16px;
-    width:min(90px,22vw);
-    height:auto;
+    top: 20px;
+    right: 20px;
+    width: 90px;
     z-index: 20;
-    filter: drop-shadow(0 2px 10px rgba(0,0,0,.25));
   }
 
-  /* Main wrapper */
-  .wrap{
-    width:min(980px, 94vw);
-    margin:0 auto;
-    height:100%;
-    display:grid;
-    place-items:center;
-    position:relative;
+  .wrap {
+    position: relative;
+    text-align: center;
+    width: 100%;
+    height: 100%;
   }
 
-  /* Title (front) */
-  .title{
-    position:absolute;
-    top:7%;
-    left:50%;
-    transform:translateX(-50%);
-    text-align:center;
-    font-weight:800;
-    font-size: clamp(22px, 3.2vw, 34px);
-    z-index: 10; /* in front of Burj */
-    letter-spacing:.2px;
+  /* Title */
+  .title {
+    position: absolute;
+    top: 7%;
+    left: 50%;
+    transform: translateX(-50%);
+    font-weight: 900;
+    font-size: clamp(32px, 4vw, 60px);
+    letter-spacing: 0.5px;
+    z-index: 10;
   }
 
-  /* Burj (background) */
-  .burj{
-    position:absolute;
-    left:50%;
-    top:50%;
-    transform: translate(-50%, -38%); /* centered slightly higher */
-    width:min(460px, 76vw);
-    opacity:.28;          /* subtle, sits behind */
-    z-index: 1;           /* behind text and timer */
-    filter: drop-shadow(0 12px 30px rgba(0,0,0,.35));
-    pointer-events:none;
+  /* Burj */
+  .burj {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: min(420px, 70vw);
+    opacity: 0.25;
+    z-index: 1;
   }
 
-  /* Countdown (front) */
-  .countdown{
-    position:absolute;
-    bottom: 14%;
-    left:50%;
-    transform:translateX(-50%);
-    display:flex; gap:18px; flex-wrap:wrap; justify-content:center;
-    z-index: 12;          /* in front of Burj */
-    text-shadow: 0 0 16px rgba(0,0,0,.35);
-  }
-  .unit{ display:flex; flex-direction:column; align-items:center; min-width:88px; }
-  .num{
-    font-weight:900; line-height:1;
-    font-size: clamp(40px, 7.2vw, 92px);
-    color:#111; background:#fff;
-    padding: 6px 14px 10px; border-radius:12px;
-    box-shadow: 0 8px 26px rgba(0,0,0,.25), 0 0 34px rgba(255,255,255,.35);
-  }
-  .lab{
-    margin-top:6px; color:#fff; opacity:.95;
-    font-size: clamp(11px, 1.8vw, 14px);
-    letter-spacing:1px; text-transform:uppercase;
+  /* Countdown boxes all in one line */
+  .countdown {
+    position: absolute;
+    bottom: 20%;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 20px;
+    z-index: 10;
   }
 
-  /* Hashtag (front) */
-  .hashtag{
-    position:absolute;
-    bottom:6%;
-    left:50%; transform:translateX(-50%);
-    z-index:12;
-    font-weight:700;
-    font-size: clamp(14px, 2.4vw, 18px);
+  .unit {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
   }
 
-  @media (max-width:420px){
-    .countdown{ gap:12px }
-    .unit{ min-width:70px }
+  .num {
+    background: #fff;
+    color: #111;
+    font-weight: 900;
+    font-size: clamp(36px, 7vw, 90px);
+    line-height: 1;
+    padding: 10px 18px;
+    border-radius: 12px;
+    box-shadow: 0 0 25px rgba(255, 255, 255, 0.5);
+  }
+
+  .lab {
+    margin-top: 6px;
+    font-size: clamp(12px, 2vw, 14px);
+    color: #fff;
+    opacity: 0.9;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+
+  /* Hashtag */
+  .hashtag {
+    position: absolute;
+    bottom: 10%;
+    left: 50%;
+    transform: translateX(-50%);
+    font-weight: 700;
+    font-size: clamp(16px, 2.5vw, 22px);
+    background: #8b0000;
+    padding: 10px 20px;
+    border-radius: 8px;
   }
 </style>
 </head>
 <body>
 
-  <!-- Top-right logo: upload logo.png or change src -->
-  <img class="logo" src="logo.png" alt="Pizza Hut logo" />
+  <img src="logo.png" alt="Pizza Hut logo" class="logo" />
 
-  <main class="wrap" role="main">
+  <main class="wrap">
     <h1 class="title">Gravity-Defying Crust | بيتزا ضد الجاذبية</h1>
 
-    <!-- Burj Khalifa background silhouette -->
-    <svg class="burj" viewBox="0 0 180 600" role="img" aria-label="Burj Khalifa silhouette">
+    <svg class="burj" viewBox="0 0 180 600">
       <defs>
         <linearGradient id="steel" x1="0" y1="0" x2="0" y2="1">
           <stop offset="0%" stop-color="#e6e9ef"/>
@@ -133,8 +137,7 @@
       <rect x="40" y="440" width="100" height="90" rx="6" fill="url(#steel)"/>
     </svg>
 
-    <!-- Countdown (front) -->
-    <div class="countdown" aria-live="polite" aria-atomic="true">
+    <div class="countdown">
       <div class="unit">
         <div class="num" id="d">00</div>
         <div class="lab">Days</div>
@@ -157,27 +160,23 @@
   </main>
 
 <script>
-  // Set your target time (Dubai, UTC+04:00)
   const TARGET = new Date('2025-11-17T12:00:00+04:00');
-
   const dEl = document.getElementById('d');
   const hEl = document.getElementById('h');
   const mEl = document.getElementById('m');
   const sEl = document.getElementById('s');
 
-  const pad = n => String(n).padStart(2,'0');
+  function pad(n){ return String(n).padStart(2,'0'); }
 
   function tick(){
     const now = new Date();
     let diff = TARGET - now;
     if (diff < 0) diff = 0;
-
     const sec = Math.floor(diff / 1000);
     const days = Math.floor(sec / 86400);
-    const hrs  = Math.floor((sec % 86400) / 3600);
+    const hrs = Math.floor((sec % 86400) / 3600);
     const mins = Math.floor((sec % 3600) / 60);
     const secs = sec % 60;
-
     dEl.textContent = pad(days);
     hEl.textContent = pad(hrs);
     mEl.textContent = pad(mins);
